@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import Todos from './to_do';
 import AddTodo from './Addtodo';
 import Navbar from './components/Navbar';
-import { BrowserRouter, Route } from 'react-router-dom';
+// con el Switch cuando se este navegando va marcar la primera
+// ruta que encuentre segun la consulta que se necesite
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -44,10 +46,14 @@ class App extends Component {
       <div className="container">
         <BrowserRouter>
           <Navbar></Navbar>
-          <Route exact path="/" component={Home}></Route>
-          <Route path="/contact" component={Contact}></Route>
-          <Route path="/about" component={About}></Route>
-          <Route path="/:post_id" component={Post}></Route>
+          <Switch>
+            
+            <Route exact path="/" component={Home}></Route>
+            <Route path="/contact" component={Contact}></Route>
+            <Route path="/about" component={About}></Route>
+            <Route path="/post/:post_id" component={Post}></Route>
+          
+          </Switch>
           <Todos todos={this.state.todos} deleteTodo={this.deleteTodo}></Todos>
           <AddTodo addTodo={this.addTodo}></AddTodo>
         </BrowserRouter>
